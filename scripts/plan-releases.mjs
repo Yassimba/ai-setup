@@ -40,6 +40,7 @@ function commitsFor(component, baseTag) {
     const body = git(["show", "-s", "--format=%b", hash]);
     const files = git([
       "diff-tree",
+      "--root",
       "--no-commit-id",
       "--name-only",
       "-r",
