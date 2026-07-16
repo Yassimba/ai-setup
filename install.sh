@@ -2,7 +2,7 @@
 set -eu
 
 NAME="ai-setup"
-VERSION="0.6.1"
+VERSION="0.6.2"
 REPO="Yassimba/ai-setup"
 TAG="ai-setup-v${VERSION}"
 INSTALL_DIR="${AI_SETUP_INSTALL_DIR:-${YASSIMBA_INSTALL_DIR:-$HOME/.local/bin}}"

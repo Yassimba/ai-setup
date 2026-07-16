@@ -1,6 +1,6 @@
 id = "yassin.jumplist"
 name = "Pane Jumplist"
-version = "0.2.0"
+version = "0.2.1"
 min_herdr_version = "0.7.0"
 description = "Back/forward through pane focus history, VS Code style"
 platforms = ["macos", "linux", "windows"]

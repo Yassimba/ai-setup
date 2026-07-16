@@ -1,6 +1,6 @@
 {
   "name": "@yassimba/pi-herdr-worktree",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Continue the active Pi session in a fresh Herdr-managed git worktree",
   "license": "MIT",
   "type": "module",

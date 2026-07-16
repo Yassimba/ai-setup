@@ -1,6 +1,6 @@
 {
   "name": "@yassimba/pi-mindwalk",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Open the current Pi coding-agent session as a Mindwalk 3D codebase replay",
   "license": "MIT",
   "type": "module",

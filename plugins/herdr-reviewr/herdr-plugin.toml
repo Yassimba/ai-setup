@@ -1,6 +1,6 @@
 id = "yassimba.reviewr"
 name = "reviewr"
-version = "0.3.0"
+version = "0.3.1"
 min_herdr_version = "0.7.0"
 platforms = ["macos", "linux", "windows"]
 description = "Terminal code-review sidebar for herdr: GitHub PRs and GitLab MRs."

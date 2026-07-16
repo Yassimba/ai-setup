@@ -1,6 +1,6 @@
 {
   "name": "@yassimba/pi-subagents",
-  "version": "0.37.1",
+  "version": "0.37.2",
   "description": "Pi extension for delegating tasks to subagents with chains, parallel execution, and TUI clarification (fork of nicobailon/pi-subagents)",
   "author": "Nico Bailon",
   "contributors": [

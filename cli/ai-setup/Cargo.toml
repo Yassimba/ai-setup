@@ -1,6 +1,6 @@
 [package]
 name = "ai-setup"
-version = "0.6.1"
+version = "0.6.2"
 edition = "2021"
 description = "Install and manage Yassimba's curated agent skills, Pi packages, and Herdr plugins"
 license = "MIT"

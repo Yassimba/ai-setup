@@ -1031,7 +1031,10 @@ mod tests {
             repo("gitlab.com", "group/subgroup", "project")
         );
         assert_eq!(
-            classify_remote("git@gitlab.selfhosted.example.com:team/platform/tools/cli.git", &selfhosted),
+            classify_remote(
+                "git@gitlab.selfhosted.example.com:team/platform/tools/cli.git",
+                &selfhosted
+            ),
             repo("gitlab.selfhosted.example.com", "team/platform/tools", "cli")
         );
         // An SSH alias of a trusted GitLab host resolves to its canonical host.

@@ -322,8 +322,11 @@ hosts:
     #[test]
     fn known_hosts_expose_the_alias_expansion_set() {
         let dir = tempfile::tempdir().unwrap();
-        let glab =
-            write(dir.path(), "config.yml", "hosts:\n    selfhosted.example.com:\n        token: t\n");
+        let glab = write(
+            dir.path(),
+            "config.yml",
+            "hosts:\n    selfhosted.example.com:\n        token: t\n",
+        );
         let c = HostClassifier::from_files(None, Some(&glab), Some("ghe.example.com"), None);
         let known: Vec<&str> = c.known_hosts().collect();
         assert!(known.contains(&"github.com"));

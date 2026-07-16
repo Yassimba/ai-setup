@@ -1,6 +1,6 @@
 {
   "name": "@yassimba/pi-openai-fast",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "OpenAI fast mode toggle for Pi using the priority service tier",
   "license": "MIT",
   "type": "module",

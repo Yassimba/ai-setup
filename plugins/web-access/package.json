@@ -1,6 +1,6 @@
 {
   "name": "@yassimba/pi-web-access",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Reviewed, pinned distribution of Pi Web Access",
   "license": "MIT",
   "type": "module",

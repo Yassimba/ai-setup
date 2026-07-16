@@ -6,7 +6,7 @@ $ErrorActionPreference = "Stop"
 $script:ProgressPreference = "SilentlyContinue"
 
 $Name = "ai-setup"
-$Version = "0.6.1"
+$Version = "0.6.2"
 $Repo = "Yassimba/ai-setup"
 $Tag = "ai-setup-v$Version"
 $InstallDir = if ($env:AI_SETUP_INSTALL_DIR) {

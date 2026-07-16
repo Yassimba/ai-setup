@@ -1,6 +1,6 @@
 id = "yassin.project-switcher"
 name = "Project Switcher"
-version = "0.3.0"
+version = "0.3.1"
 min_herdr_version = "0.7.0"
 description = "Portable fuzzy project picker that changes the focused pane's directory"
 platforms = ["macos", "linux", "windows"]

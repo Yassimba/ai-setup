@@ -9,6 +9,8 @@ history; `yassimba.reviewr` restarts its own line at 0.1.0 on top of upstream v0
 
 ## [Unreleased]
 
+## [0.3.1] - 2026-07-16
+
 ### Added
 - Multi-line review comments on both forges: a ranged selection in a remote Changes diff drafts
   one comment spanning the whole run. GitHub grouped reviews carry `start_line`/`start_side`;

@@ -3,66 +3,170 @@
   "releases": [
     {
       "id": "ai-setup",
-      "version": "0.6.1",
-      "tag": "ai-setup-v0.6.1",
+      "version": "0.6.2",
+      "tag": "ai-setup-v0.6.2",
       "bump": "patch",
       "distribution": "rust-binary",
       "commits": [
         {
-          "hash": "9244cfde37a3f63e624e3c01c9fd1a335dc213c6",
-          "subject": "ci: bump the development-dependencies group across 1 directory with 5 updates (#49)"
+          "hash": "cb9c0041f8d322476668d2aadf78687eeea786a6",
+          "subject": "chore: reset public history"
+        }
+      ]
+    },
+    {
+      "id": "ask-user",
+      "version": "0.1.2",
+      "tag": "ask-user-v0.1.2",
+      "bump": "patch",
+      "distribution": "npm",
+      "commits": [
+        {
+          "hash": "cb9c0041f8d322476668d2aadf78687eeea786a6",
+          "subject": "chore: reset public history"
         }
       ]
     },
     {
       "id": "claude-bridge",
-      "version": "0.1.2",
-      "tag": "claude-bridge-v0.1.2",
+      "version": "0.1.3",
+      "tag": "claude-bridge-v0.1.3",
       "bump": "patch",
       "distribution": "npm",
       "commits": [
         {
-          "hash": "9244cfde37a3f63e624e3c01c9fd1a335dc213c6",
-          "subject": "ci: bump the development-dependencies group across 1 directory with 5 updates (#49)"
+          "hash": "cb9c0041f8d322476668d2aadf78687eeea786a6",
+          "subject": "chore: reset public history"
+        }
+      ]
+    },
+    {
+      "id": "herdr-jumplist",
+      "version": "0.2.1",
+      "tag": "herdr-jumplist-v0.2.1",
+      "bump": "patch",
+      "distribution": "rust-source",
+      "commits": [
+        {
+          "hash": "cb9c0041f8d322476668d2aadf78687eeea786a6",
+          "subject": "chore: reset public history"
+        }
+      ]
+    },
+    {
+      "id": "herdr-project-switcher",
+      "version": "0.3.1",
+      "tag": "herdr-project-switcher-v0.3.1",
+      "bump": "patch",
+      "distribution": "rust-binary",
+      "commits": [
+        {
+          "hash": "cb9c0041f8d322476668d2aadf78687eeea786a6",
+          "subject": "chore: reset public history"
+        }
+      ]
+    },
+    {
+      "id": "herdr-reviewr",
+      "version": "0.3.1",
+      "tag": "herdr-reviewr-v0.3.1",
+      "bump": "patch",
+      "distribution": "rust-binary",
+      "commits": [
+        {
+          "hash": "cb9c0041f8d322476668d2aadf78687eeea786a6",
+          "subject": "chore: reset public history"
+        }
+      ]
+    },
+    {
+      "id": "herdr-worktree",
+      "version": "0.2.1",
+      "tag": "herdr-worktree-v0.2.1",
+      "bump": "patch",
+      "distribution": "npm",
+      "commits": [
+        {
+          "hash": "cb9c0041f8d322476668d2aadf78687eeea786a6",
+          "subject": "chore: reset public history"
+        }
+      ]
+    },
+    {
+      "id": "mindwalk",
+      "version": "0.1.1",
+      "tag": "mindwalk-v0.1.1",
+      "bump": "patch",
+      "distribution": "npm",
+      "commits": [
+        {
+          "hash": "cb9c0041f8d322476668d2aadf78687eeea786a6",
+          "subject": "chore: reset public history"
+        }
+      ]
+    },
+    {
+      "id": "openai-fast",
+      "version": "0.1.2",
+      "tag": "openai-fast-v0.1.2",
+      "bump": "patch",
+      "distribution": "npm",
+      "commits": [
+        {
+          "hash": "cb9c0041f8d322476668d2aadf78687eeea786a6",
+          "subject": "chore: reset public history"
+        }
+      ]
+    },
+    {
+      "id": "pi-reviewr-collab",
+      "version": "0.2.1",
+      "tag": "pi-reviewr-collab-v0.2.1",
+      "bump": "patch",
+      "distribution": "npm",
+      "commits": [
+        {
+          "hash": "cb9c0041f8d322476668d2aadf78687eeea786a6",
+          "subject": "chore: reset public history"
         }
       ]
     },
     {
       "id": "pi-subagents",
-      "version": "0.37.1",
-      "tag": "pi-subagents-v0.37.1",
+      "version": "0.37.2",
+      "tag": "pi-subagents-v0.37.2",
       "bump": "patch",
       "distribution": "npm",
       "commits": [
         {
-          "hash": "9244cfde37a3f63e624e3c01c9fd1a335dc213c6",
-          "subject": "ci: bump the development-dependencies group across 1 directory with 5 updates (#49)"
+          "hash": "cb9c0041f8d322476668d2aadf78687eeea786a6",
+          "subject": "chore: reset public history"
         }
       ]
     },
     {
       "id": "rewind",
-      "version": "0.1.2",
-      "tag": "rewind-v0.1.2",
+      "version": "0.1.3",
+      "tag": "rewind-v0.1.3",
       "bump": "patch",
       "distribution": "npm",
       "commits": [
         {
-          "hash": "9244cfde37a3f63e624e3c01c9fd1a335dc213c6",
-          "subject": "ci: bump the development-dependencies group across 1 directory with 5 updates (#49)"
+          "hash": "cb9c0041f8d322476668d2aadf78687eeea786a6",
+          "subject": "chore: reset public history"
         }
       ]
     },
     {
       "id": "web-access",
-      "version": "0.1.2",
-      "tag": "web-access-v0.1.2",
+      "version": "0.1.3",
+      "tag": "web-access-v0.1.3",
       "bump": "patch",
       "distribution": "npm",
       "commits": [
         {
-          "hash": "9244cfde37a3f63e624e3c01c9fd1a335dc213c6",
-          "subject": "ci: bump the development-dependencies group across 1 directory with 5 updates (#49)"
+          "hash": "cb9c0041f8d322476668d2aadf78687eeea786a6",
+          "subject": "chore: reset public history"
         }
       ]
     }

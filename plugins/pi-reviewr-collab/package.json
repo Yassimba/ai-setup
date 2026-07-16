@@ -1,6 +1,6 @@
 {
   "name": "@yassimba/pi-reviewr-collab",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Trusted Pi extension binding a Pi session to a reviewr pane: prompt context capture, tool-location reporting, and local review-draft staging over a local socket",
   "author": "Yassin Chibrani - Derks",
   "license": "MIT",
