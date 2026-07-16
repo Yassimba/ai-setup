@@ -1,0 +1,127 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    outputs:
+      linux: ${{ steps.plan.outputs.linux }}
+      windows: ${{ steps.plan.outputs.windows }}
+      linux_count: ${{ steps.plan.outputs.linux_count }}
+      windows_count: ${{ steps.plan.outputs.windows_count }}
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        with:
+          node-version: 24
+      - id: plan
+        name: Infer affected projects
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: node scripts/ci-plan.mjs
+
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        with:
+          node-version: 24
+          cache: npm
+      - uses: actions/setup-go@924ae3a1cded613372ab5595356fb5720e22ba16 # v6
+        with:
+          go-version-file: plugins/mindwalk/go.mod
+          cache: false
+      - run: npm ci
+      - run: go test ./...
+        working-directory: plugins/mindwalk
+      - run: npm run check:js
+      - run: bash -n install.sh
+
+  powershell-installer:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - name: Parse installer
+        shell: powershell
+        run: '[scriptblock]::Create((Get-Content install.ps1 -Raw)) | Out-Null'
+
+  rust-linux:
+    needs: plan
+    if: needs.plan.outputs.linux_count != '0'
+    name: rust · ${{ matrix.id }} · linux
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include: ${{ fromJSON(needs.plan.outputs.linux) }}
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - uses: dtolnay/rust-toolchain@4be7066ada62dd38de10e7b70166bc74ed198c30 # stable
+        with:
+          toolchain: ${{ matrix.toolchain }}
+          components: rustfmt, clippy
+      - uses: Swatinem/rust-cache@e18b497796c12c097a38f9edb9d0641fb99eee32 # v2
+        with:
+          workspaces: ${{ matrix.workspace }}
+      - run: cargo fmt --manifest-path "${{ matrix.manifest }}" -- --check
+      - run: cargo clippy --manifest-path "${{ matrix.manifest }}" --all-targets --all-features -- -D warnings
+      - run: cargo test --manifest-path "${{ matrix.manifest }}" --all-features
+      - run: cargo build --manifest-path "${{ matrix.manifest }}" --release --all-features
+
+  rust-windows:
+    needs: plan
+    if: needs.plan.outputs.windows_count != '0'
+    name: rust · ${{ matrix.id }} · windows
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include: ${{ fromJSON(needs.plan.outputs.windows) }}
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - uses: dtolnay/rust-toolchain@4be7066ada62dd38de10e7b70166bc74ed198c30 # stable
+        with:
+          toolchain: ${{ matrix.toolchain }}
+          targets: aarch64-pc-windows-msvc
+      - uses: Swatinem/rust-cache@e18b497796c12c097a38f9edb9d0641fb99eee32 # v2
+        with:
+          workspaces: ${{ matrix.workspace }}
+      - run: cargo test --manifest-path "${{ matrix.manifest }}" --all-features
+      - run: cargo build --manifest-path "${{ matrix.manifest }}" --release --all-features
+      # Build-only cross-compile: mirrors the aarch64 Windows release target.
+      - run: cargo build --manifest-path "${{ matrix.manifest }}" --release --all-features --target aarch64-pc-windows-msvc
+
+  result:
+    if: always()
+    needs: [plan, quality, powershell-installer, rust-linux, rust-windows]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require every applicable CI job
+        env:
+          PLAN: ${{ needs.plan.result }}
+          QUALITY: ${{ needs.quality.result }}
+          POWERSHELL: ${{ needs.powershell-installer.result }}
+          RUST_LINUX: ${{ needs.rust-linux.result }}
+          RUST_WINDOWS: ${{ needs.rust-windows.result }}
+        run: |
+          test "$PLAN" = success
+          test "$QUALITY" = success
+          test "$POWERSHELL" = success
+          case "$RUST_LINUX" in success|skipped) ;; *) exit 1 ;; esac
+          case "$RUST_WINDOWS" in success|skipped) ;; *) exit 1 ;; esac

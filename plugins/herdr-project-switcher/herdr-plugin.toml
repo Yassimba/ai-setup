@@ -1,0 +1,33 @@
+id = "yassin.project-switcher"
+name = "Project Switcher"
+version = "0.3.0"
+min_herdr_version = "0.7.0"
+description = "Portable fuzzy project picker that changes the focused pane's directory"
+platforms = ["macos", "linux", "windows"]
+
+# Managed installs download a prebuilt binary. Local `herdr plugin link`
+# checkouts should run `cargo build --release` and copy/link it into bin/.
+[[build]]
+platforms = ["macos", "linux"]
+command = ["bash", "herdr/install.sh"]
+
+[[build]]
+platforms = ["windows"]
+command = ["powershell", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "herdr/install.ps1"]
+
+[[panes]]
+id = "switch"
+title = "Projects"
+placement = "overlay"
+platforms = ["macos", "linux"]
+command = ["sh", "-c", "exec \"$HERDR_PLUGIN_ROOT/bin/herdr-project-switcher\""]
+
+# The relative path is resolved by cmd against its own cwd, which herdr defaults to the
+# plugin root for panes opened without --cwd. An expanded %HERDR_PLUGIN_ROOT% would reach
+# cmd unquoted and break for profile paths containing a space (C:\Users\Jan Dirk\...).
+[[panes]]
+id = "switch-win"
+title = "Projects"
+placement = "overlay"
+platforms = ["windows"]
+command = ["cmd", "/d", "/c", "bin\\herdr-project-switcher.exe"]

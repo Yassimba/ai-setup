@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mindwalk.local/schema/citymap.schema.json",
+  "title": "mindwalk citymap",
+  "type": "object",
+  "required": ["version", "repo", "files", "dirs", "layout"],
+  "properties": {
+    "version": { "const": 1 },
+    "repo": {
+      "type": "object",
+      "required": ["root", "dirty", "generatedAt"],
+      "properties": {
+        "root": { "type": "string" },
+        "commit": { "type": "string" },
+        "dirty": { "type": "boolean" },
+        "generatedAt": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "files": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "path", "dir", "lines", "bytes", "rect", "ghost"],
+        "properties": {
+          "id": { "type": "integer", "minimum": 0 },
+          "path": { "type": "string" },
+          "dir": { "type": "string" },
+          "lines": { "type": "integer", "minimum": 0 },
+          "bytes": { "type": "integer", "minimum": 0 },
+          "lang": { "type": "string" },
+          "rect": { "$ref": "#/$defs/rect" },
+          "ghost": { "type": "boolean" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "dirs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["path", "depth", "rect", "fileCount", "lines"],
+        "properties": {
+          "path": { "type": "string" },
+          "depth": { "type": "integer", "minimum": 1 },
+          "rect": { "$ref": "#/$defs/rect" },
+          "fileCount": { "type": "integer", "minimum": 0 },
+          "lines": { "type": "integer", "minimum": 0 }
+        },
+        "additionalProperties": false
+      }
+    },
+    "layout": {
+      "type": "object",
+      "required": ["algorithm", "weight"],
+      "properties": {
+        "algorithm": { "type": "string" },
+        "weight": { "type": "string" }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "rect": {
+      "type": "object",
+      "required": ["x", "z", "w", "d"],
+      "properties": {
+        "x": { "type": "number" },
+        "z": { "type": "number" },
+        "w": { "type": "number" },
+        "d": { "type": "number" }
+      },
+      "additionalProperties": false
+    }
+  }
+}

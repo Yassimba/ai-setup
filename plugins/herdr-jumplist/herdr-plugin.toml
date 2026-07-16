@@ -1,0 +1,53 @@
+id = "yassin.jumplist"
+name = "Pane Jumplist"
+version = "0.2.0"
+min_herdr_version = "0.7.0"
+description = "Back/forward through pane focus history, VS Code style"
+platforms = ["macos", "linux", "windows"]
+
+# Builds from source into bin/. Requires a Rust toolchain.
+[[build]]
+platforms = ["macos", "linux"]
+command = ["bash", "herdr/build.sh"]
+
+[[build]]
+platforms = ["windows"]
+command = ["powershell", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "herdr/build.ps1"]
+
+[[events]]
+on = "pane.focused"
+platforms = ["macos", "linux"]
+command = ["sh", "-c", "exec \"$HERDR_PLUGIN_ROOT/bin/herdr-jumplist\" record"]
+
+# Windows commands use paths relative to the plugin root (herdr's cwd for events and
+# actions): an expanded %HERDR_PLUGIN_ROOT% would reach cmd unquoted and break for any
+# profile path containing a space (C:\Users\Jan Dirk\...). cmd resolves the relative
+# path against its own cwd, so the path never appears on the command line.
+[[events]]
+on = "pane.focused"
+platforms = ["windows"]
+command = ["cmd", "/d", "/c", "bin\\herdr-jumplist.exe", "record"]
+
+[[actions]]
+id = "back"
+title = "Focus previous pane (history)"
+platforms = ["macos", "linux"]
+command = ["sh", "-c", "exec \"$HERDR_PLUGIN_ROOT/bin/herdr-jumplist\" back"]
+
+[[actions]]
+id = "forward"
+title = "Focus next pane (history)"
+platforms = ["macos", "linux"]
+command = ["sh", "-c", "exec \"$HERDR_PLUGIN_ROOT/bin/herdr-jumplist\" forward"]
+
+[[actions]]
+id = "back-win"
+title = "Focus previous pane (history)"
+platforms = ["windows"]
+command = ["cmd", "/d", "/c", "bin\\herdr-jumplist.exe", "back"]
+
+[[actions]]
+id = "forward-win"
+title = "Focus next pane (history)"
+platforms = ["windows"]
+command = ["cmd", "/d", "/c", "bin\\herdr-jumplist.exe", "forward"]

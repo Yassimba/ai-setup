@@ -1,0 +1,613 @@
+{
+  "schemaVersion": 1,
+  "resources": [
+    {
+      "id": "pi-package:@yassimba/pi-ask-user",
+      "kind": "pi-package",
+      "group": "Pi packages",
+      "label": "Ask User",
+      "description": "Interactive ask_user tool with searchable selection UI, multi-select, and freeform input",
+      "installTarget": "@yassimba/pi-ask-user",
+      "nextAction": "Start Pi and use the installed package."
+    },
+    {
+      "id": "pi-package:@yassimba/pi-claude-bridge",
+      "kind": "pi-package",
+      "group": "Pi packages",
+      "label": "Claude Bridge",
+      "description": "Use Claude Code as a Pi model provider or delegate work through AskClaude",
+      "installTarget": "@yassimba/pi-claude-bridge",
+      "nextAction": "Start Pi and use the installed package."
+    },
+    {
+      "id": "pi-package:@yassimba/pi-herdr-worktree",
+      "kind": "pi-package",
+      "group": "Pi packages",
+      "label": "Herdr Worktree",
+      "description": "Continue the active Pi session in a fresh Herdr git worktree",
+      "installTarget": "@yassimba/pi-herdr-worktree",
+      "nextAction": "Start Pi and use the installed package."
+    },
+    {
+      "id": "pi-package:@yassimba/pi-mindwalk",
+      "kind": "pi-package",
+      "group": "Pi packages",
+      "label": "Mindwalk",
+      "description": "Replay the current Pi session on a 3D map of the codebase",
+      "installTarget": "@yassimba/pi-mindwalk",
+      "nextAction": "Run /mindwalk in Pi to open the current session replay."
+    },
+    {
+      "id": "pi-package:@yassimba/pi-openai-fast",
+      "kind": "pi-package",
+      "group": "Pi packages",
+      "label": "OpenAI Fast Mode",
+      "description": "Request OpenAI priority service tier from supported models",
+      "installTarget": "@yassimba/pi-openai-fast",
+      "nextAction": "Start Pi and use the installed package."
+    },
+    {
+      "id": "pi-package:@yassimba/pi-reviewr-collab",
+      "kind": "pi-package",
+      "group": "Pi packages",
+      "label": "Reviewr Collaboration",
+      "description": "Connect Pi to reviewr for review context, agent following, and local draft staging",
+      "installTarget": "@yassimba/pi-reviewr-collab",
+      "nextAction": "Start Pi and use the installed package."
+    },
+    {
+      "id": "pi-package:@yassimba/pi-rewind",
+      "kind": "pi-package",
+      "group": "Pi packages",
+      "label": "Rewind",
+      "description": "File checkpoints for Pi's conversation tree: branch to an earlier message and restore files to match",
+      "installTarget": "@yassimba/pi-rewind",
+      "nextAction": "Start Pi and use the installed package."
+    },
+    {
+      "id": "pi-package:@yassimba/pi-subagents",
+      "kind": "pi-package",
+      "group": "Pi packages",
+      "label": "Subagents",
+      "description": "Delegate work to focused child agents: chains, parallel fan-out, saved workflows, TUI clarification",
+      "installTarget": "@yassimba/pi-subagents",
+      "nextAction": "Start Pi and use the installed package."
+    },
+    {
+      "id": "pi-package:@yassimba/pi-web-access",
+      "kind": "pi-package",
+      "group": "Pi packages",
+      "label": "Web Access",
+      "description": "Search and fetch web, PDF, GitHub, and video content from Pi",
+      "installTarget": "@yassimba/pi-web-access",
+      "nextAction": "Start Pi and use the installed package."
+    },
+    {
+      "id": "skill:backlog",
+      "kind": "skill",
+      "group": "Coding",
+      "label": "backlog",
+      "description": "Backlog management: use when the user mentions a backlog, asks what's next, wants work recorded before implementation, or wants queued ideas or specs prioritized, transitioned, completed, or removed; also use when another skill needs to record lifecycle changes.",
+      "installTarget": "backlog",
+      "nextAction": "Ask your coding agent to use the backlog skill.",
+      "dependencies": ["grill-me"]
+    },
+    {
+      "id": "skill:blueprint",
+      "kind": "skill",
+      "group": "Coding",
+      "label": "blueprint",
+      "description": "Blueprint a change before building it — Mermaid diagrams of the design, held for approval before any code. Use before implementing non-trivial work — proactively or when the user asks to see the design first — or when another skill needs a design-approval gate.",
+      "installTarget": "blueprint",
+      "nextAction": "Ask your coding agent to use the blueprint skill.",
+      "dependencies": []
+    },
+    {
+      "id": "skill:brainstorming",
+      "kind": "skill",
+      "group": "Coding",
+      "label": "brainstorming",
+      "description": "Use when the user wants to brainstorm or explore an idea — a feature, product direction, or \"what if\" — before deciding whether it deserves a plan. Ideation only — ends in an idea brief, not a design.",
+      "installTarget": "brainstorming",
+      "nextAction": "Ask your coding agent to use the brainstorming skill.",
+      "dependencies": ["backlog", "to-spec", "to-tickets"]
+    },
+    {
+      "id": "skill:browser-usage",
+      "kind": "skill",
+      "group": "Coding",
+      "label": "browser-usage",
+      "description": "Core agent-browser usage guide — read before running any agent-browser command. Use when the user asks to interact with, test, or automate a website — clicking, filling forms, extracting data, taking screenshots, logging in.",
+      "installTarget": "browser-usage",
+      "nextAction": "Ask your coding agent to use the browser-usage skill.",
+      "dependencies": []
+    },
+    {
+      "id": "skill:code-review",
+      "kind": "skill",
+      "group": "Coding",
+      "label": "code-review",
+      "description": "Review the changes since a fixed point (commit, branch, tag, or merge-base) along two axes — Standards (this repo's documented coding standards) and Spec (what the originating issue/PRD asked for). Use when the user wants to review a branch, a PR, work-in-progress changes, or asks to \"review since X\".",
+      "installTarget": "code-review",
+      "nextAction": "Ask your coding agent to use the code-review skill.",
+      "dependencies": ["setup-project"]
+    },
+    {
+      "id": "skill:commit",
+      "kind": "skill",
+      "group": "Coding",
+      "label": "commit",
+      "description": "Use when creating a git commit — the user asks to commit, or a unit of work is complete and ready to commit.",
+      "installTarget": "commit",
+      "nextAction": "Ask your coding agent to use the commit skill.",
+      "dependencies": ["diagnosing-bugs", "writing-clearly-and-concisely"]
+    },
+    {
+      "id": "skill:database-pro",
+      "kind": "skill",
+      "group": "Coding",
+      "label": "database-pro",
+      "description": "Use when writing or optimizing SQL queries, designing database schemas, tuning database performance, or administering PostgreSQL/MySQL. Invoke for EXPLAIN analysis, indexing, JSONB, replication, VACUUM, window functions, CTEs, monitoring, partitioning.",
+      "installTarget": "database-pro",
+      "nextAction": "Ask your coding agent to use the database-pro skill.",
+      "dependencies": []
+    },
+    {
+      "id": "skill:diagnosing-bugs",
+      "kind": "skill",
+      "group": "Coding",
+      "label": "diagnosing-bugs",
+      "description": "Diagnosis loop for hard bugs and performance regressions. Use when the user says \"diagnose\"/\"debug this\", or reports something broken/throwing/failing/slow.",
+      "installTarget": "diagnosing-bugs",
+      "nextAction": "Ask your coding agent to use the diagnosing-bugs skill.",
+      "dependencies": ["improve-codebase-architecture"]
+    },
+    {
+      "id": "skill:e2e-test",
+      "kind": "skill",
+      "group": "Coding",
+      "label": "e2e-test",
+      "description": "Manual end-to-end walkthrough — drive the live app first-hand (CLI, API, web UI) and query the datastore directly. Trigger on \"e2e\", \"smoke test\", \"manually test\".",
+      "installTarget": "e2e-test",
+      "nextAction": "Ask your coding agent to use the e2e-test skill.",
+      "dependencies": ["tdd"]
+    },
+    {
+      "id": "skill:grill-with-docs",
+      "kind": "skill",
+      "group": "Coding",
+      "label": "grill-with-docs",
+      "description": "A relentless interview to sharpen a plan or design, which also creates docs (ADR's and glossary) as we go.",
+      "installTarget": "grill-with-docs",
+      "nextAction": "Ask your coding agent to use the grill-with-docs skill.",
+      "dependencies": ["domain-modeling", "grilling"]
+    },
+    {
+      "id": "skill:grill-with-examples",
+      "kind": "skill",
+      "group": "Coding",
+      "label": "grill-with-examples",
+      "description": "Example-map a ticket or spec - grill the user for rules and concrete examples, write them into the ticket, ready to become the test list for the TDD loop.",
+      "installTarget": "grill-with-examples",
+      "nextAction": "Ask your coding agent to use the grill-with-examples skill.",
+      "dependencies": ["grilling", "tdd"]
+    },
+    {
+      "id": "skill:implement",
+      "kind": "skill",
+      "group": "Coding",
+      "label": "implement",
+      "description": "Implement a piece of work based on a spec or set of tickets.",
+      "installTarget": "implement",
+      "nextAction": "Ask your coding agent to use the implement skill.",
+      "dependencies": ["blueprint", "code-review", "tdd"]
+    },
+    {
+      "id": "skill:loop-me",
+      "kind": "skill",
+      "group": "Coding",
+      "label": "loop-me",
+      "description": "Grill me about specs for the workflows I want to build, within this workspace.",
+      "installTarget": "loop-me",
+      "nextAction": "Ask your coding agent to use the loop-me skill.",
+      "dependencies": ["grilling"]
+    },
+    {
+      "id": "skill:merge",
+      "kind": "skill",
+      "group": "Coding",
+      "label": "merge",
+      "description": "Review-first git merge — preview incoming changes, merge --no-commit --no-ff, resolve conflicts with the user, commit only after review.",
+      "installTarget": "merge",
+      "nextAction": "Ask your coding agent to use the merge skill.",
+      "dependencies": []
+    },
+    {
+      "id": "skill:prototype",
+      "kind": "skill",
+      "group": "Coding",
+      "label": "prototype",
+      "description": "Build a throwaway prototype to answer a design question. Use when the user wants to sanity-check whether a state model or logic feels right, or explore what a UI should look like.",
+      "installTarget": "prototype",
+      "nextAction": "Ask your coding agent to use the prototype skill.",
+      "dependencies": []
+    },
+    {
+      "id": "skill:python-pro",
+      "kind": "skill",
+      "group": "Coding",
+      "label": "python-pro",
+      "description": "Use when writing Python 3.12+ — typed application code, async programming, CLI tools (cyclopts, rich), or pandas data manipulation.",
+      "installTarget": "python-pro",
+      "nextAction": "Ask your coding agent to use the python-pro skill.",
+      "dependencies": []
+    },
+    {
+      "id": "skill:refactor",
+      "kind": "skill",
+      "group": "Coding",
+      "label": "refactor",
+      "description": "Net-negative refactoring — deep analysis biased toward deletion, so the codebase ends smaller. Use when the user says \"refactor\", \"simplify\", or \"modernize\", or when you notice entropy, duplication, or over-abstraction.",
+      "installTarget": "refactor",
+      "nextAction": "Ask your coding agent to use the refactor skill.",
+      "dependencies": []
+    },
+    {
+      "id": "skill:release",
+      "kind": "skill",
+      "group": "Coding",
+      "label": "release",
+      "description": "Pre-push quality gate + pull/merge request creation. Use when the user wants to ship, release, push a branch, or open a PR/MR — runs the project's own lint, type-check, and test gates first, then commits, pushes, and opens the request on the project's forge (gh or glab).",
+      "installTarget": "release",
+      "nextAction": "Ask your coding agent to use the release skill.",
+      "dependencies": ["commit", "diagnosing-bugs", "setup-project"]
+    },
+    {
+      "id": "skill:resolving-merge-conflicts",
+      "kind": "skill",
+      "group": "Coding",
+      "label": "resolving-merge-conflicts",
+      "description": "Use when you need to resolve an in-progress git merge/rebase conflict.",
+      "installTarget": "resolving-merge-conflicts",
+      "nextAction": "Ask your coding agent to use the resolving-merge-conflicts skill.",
+      "dependencies": []
+    },
+    {
+      "id": "skill:setup-project",
+      "kind": "skill",
+      "group": "Coding",
+      "label": "setup-project",
+      "description": "Configure this repo for the engineering skills — issue tracker, domain doc layout, ai-docs gitignore. Run once per repo before first use of the other engineering skills.",
+      "installTarget": "setup-project",
+      "nextAction": "Ask your coding agent to use the setup-project skill.",
+      "dependencies": []
+    },
+    {
+      "id": "skill:tdd",
+      "kind": "skill",
+      "group": "Coding",
+      "label": "tdd",
+      "description": "Test-driven development. Use when the user wants to build features or fix bugs test-first, mentions \"red-green-refactor\", or wants integration tests.",
+      "installTarget": "tdd",
+      "nextAction": "Ask your coding agent to use the tdd skill.",
+      "dependencies": []
+    },
+    {
+      "id": "skill:terraform-engineer",
+      "kind": "skill",
+      "group": "Coding",
+      "label": "terraform-engineer",
+      "description": "Terraform infrastructure as code across AWS, Azure, or GCP. Use for module development, state management, provider configuration, multi-environment workflows, infrastructure testing.",
+      "installTarget": "terraform-engineer",
+      "nextAction": "Ask your coding agent to use the terraform-engineer skill.",
+      "dependencies": []
+    },
+    {
+      "id": "skill:to-spec",
+      "kind": "skill",
+      "group": "Coding",
+      "label": "to-spec",
+      "description": "Turn the current conversation into a spec and publish it to the project issue tracker — no interview, just synthesis of what you've already discussed.",
+      "installTarget": "to-spec",
+      "nextAction": "Ask your coding agent to use the to-spec skill.",
+      "dependencies": ["setup-project"]
+    },
+    {
+      "id": "skill:to-tickets",
+      "kind": "skill",
+      "group": "Coding",
+      "label": "to-tickets",
+      "description": "Break a plan, spec, or the current conversation into a set of tracer-bullet tickets, each declaring its blocking edges, published to the configured tracker — edges as text in a local file, or native blocking links on a real tracker.",
+      "installTarget": "to-tickets",
+      "nextAction": "Ask your coding agent to use the to-tickets skill.",
+      "dependencies": ["implement", "setup-project"]
+    },
+    {
+      "id": "skill:update-docstrings",
+      "kind": "skill",
+      "group": "Coding",
+      "label": "update-docstrings",
+      "description": "Add or update docstrings, doc comments, and inline comments in source code — any language. Use when the user wants docstrings written or fixed, a conversion to a doc style (NumPy, TSDoc, rustdoc), or a comment cleanup. Source files only — README/ADR/prose docs belong to write-documentation / write-readme.",
+      "installTarget": "update-docstrings",
+      "nextAction": "Ask your coding agent to use the update-docstrings skill.",
+      "dependencies": ["writing-clearly-and-concisely"]
+    },
+    {
+      "id": "skill:wayfinder",
+      "kind": "skill",
+      "group": "Coding",
+      "label": "wayfinder",
+      "description": "Plan a huge chunk of work — more than one agent session can hold — as a shared map of investigation tickets on your issue tracker, and resolve them one at a time until the way to the destination is clear.",
+      "installTarget": "wayfinder",
+      "nextAction": "Ask your coding agent to use the wayfinder skill.",
+      "dependencies": ["domain-modeling", "grilling", "prototype", "setup-project"]
+    },
+    {
+      "id": "skill:codebase-design",
+      "kind": "skill",
+      "group": "Architecture",
+      "label": "codebase-design",
+      "description": "Shared vocabulary for designing deep modules. Use when the user wants to design or improve a module's interface, find deepening opportunities, decide where a seam goes, make code more testable or AI-navigable, or when another skill needs the deep-module vocabulary.",
+      "installTarget": "codebase-design",
+      "nextAction": "Ask your coding agent to use the codebase-design skill.",
+      "dependencies": []
+    },
+    {
+      "id": "skill:domain-modeling",
+      "kind": "skill",
+      "group": "Architecture",
+      "label": "domain-modeling",
+      "description": "Build and sharpen a project's domain model. Use when the user wants to pin down domain terminology or a ubiquitous language, record an architectural decision, or when another skill needs to maintain the domain model.",
+      "installTarget": "domain-modeling",
+      "nextAction": "Ask your coding agent to use the domain-modeling skill.",
+      "dependencies": []
+    },
+    {
+      "id": "skill:explain-code-flow",
+      "kind": "skill",
+      "group": "Architecture",
+      "label": "explain-code-flow",
+      "description": "Generate a visual architecture walkthrough for a feature in the current codebase. Use when the user asks how a feature works at a high level — \"explain X\", \"how does X work\", \"trace the X flow\".",
+      "installTarget": "explain-code-flow",
+      "nextAction": "Ask your coding agent to use the explain-code-flow skill.",
+      "dependencies": ["writing-clearly-and-concisely"]
+    },
+    {
+      "id": "skill:improve-codebase-architecture",
+      "kind": "skill",
+      "group": "Architecture",
+      "label": "improve-codebase-architecture",
+      "description": "Scan a codebase for deepening opportunities, present them as a visual HTML report, then grill through whichever one you pick.",
+      "installTarget": "improve-codebase-architecture",
+      "nextAction": "Ask your coding agent to use the improve-codebase-architecture skill.",
+      "dependencies": ["codebase-design", "domain-modeling", "grilling"]
+    },
+    {
+      "id": "skill:zoom-out",
+      "kind": "skill",
+      "group": "Architecture",
+      "label": "zoom-out",
+      "description": "Zoom out — map the modules and callers around unfamiliar code at a higher layer of abstraction.",
+      "installTarget": "zoom-out",
+      "nextAction": "Ask your coding agent to use the zoom-out skill.",
+      "dependencies": []
+    },
+    {
+      "id": "skill:drawio-skill",
+      "kind": "skill",
+      "group": "Diagrams",
+      "label": "drawio-skill",
+      "description": "Generate draw.io diagrams — .drawio XML exported to PNG/SVG/PDF/JPG via the desktop CLI. Use when the user asks for draw.io specifically, or a requested diagram needs what Mermaid's auto-layout can't give — custom styling, swimlanes, or a rich shape vocabulary (network topology, ML/DL model figures). Default and proactive diagramming belongs to mermaid-skill.",
+      "installTarget": "drawio-skill",
+      "nextAction": "Ask your coding agent to use the drawio-skill skill.",
+      "dependencies": []
+    },
+    {
+      "id": "skill:infographic-designer",
+      "kind": "skill",
+      "group": "Diagrams",
+      "label": "infographic-designer",
+      "description": "Design infographics — structured visual summaries of a topic, dataset, or content. Use when the user asks for an infographic or infographic blueprint, or shares content and wants it presented visually (\"can you make this visual?\").\n",
+      "installTarget": "infographic-designer",
+      "nextAction": "Ask your coding agent to use the infographic-designer skill.",
+      "dependencies": []
+    },
+    {
+      "id": "skill:mermaid-skill",
+      "kind": "skill",
+      "group": "Diagrams",
+      "label": "mermaid-skill",
+      "description": "Generate Mermaid diagrams as code (.mmd) and export to PNG/SVG/PDF with mmdc. Use when the user wants a diagram — flowchart, sequence, class, ER, state, gantt, git graph, architecture, timeline, mindmap — proactively when explaining a system with 3+ components, a runtime flow, a schema, or a lifecycle, and when another skill (e.g. blueprint) needs a diagram authored or exported to an image.",
+      "installTarget": "mermaid-skill",
+      "nextAction": "Ask your coding agent to use the mermaid-skill skill.",
+      "dependencies": []
+    },
+    {
+      "id": "skill:marp-slide",
+      "kind": "skill",
+      "group": "Presentations",
+      "label": "marp-slide",
+      "description": "Create Marp presentation slides — themed decks authored in Markdown. Use when the user asks for a Marp document or wants slides written in Markdown rather than .pptx.",
+      "installTarget": "marp-slide",
+      "nextAction": "Ask your coding agent to use the marp-slide skill.",
+      "dependencies": []
+    },
+    {
+      "id": "skill:pptx",
+      "kind": "skill",
+      "group": "Presentations",
+      "label": "pptx",
+      "description": "Create, edit, or read .pptx files — decks, templates, layouts, speaker notes, comments, including extracting a file's text for use elsewhere. Use whenever a .pptx file is the input or output, and when the user asks for a deck, slides, or a presentation without naming another format (Marp/Markdown slides belong to marp-slide).",
+      "installTarget": "pptx",
+      "nextAction": "Ask your coding agent to use the pptx skill.",
+      "dependencies": []
+    },
+    {
+      "id": "skill:grill-me",
+      "kind": "skill",
+      "group": "General",
+      "label": "grill-me",
+      "description": "A relentless interview to sharpen a plan or design.",
+      "installTarget": "grill-me",
+      "nextAction": "Ask your coding agent to use the grill-me skill.",
+      "dependencies": ["grilling"]
+    },
+    {
+      "id": "skill:grilling",
+      "kind": "skill",
+      "group": "General",
+      "label": "grilling",
+      "description": "Grill the user relentlessly about a plan or design. Use when the user wants to stress-test a plan before building, or uses any 'grill' trigger phrases.",
+      "installTarget": "grilling",
+      "nextAction": "Ask your coding agent to use the grilling skill.",
+      "dependencies": []
+    },
+    {
+      "id": "skill:handoff",
+      "kind": "skill",
+      "group": "General",
+      "label": "handoff",
+      "description": "Compact the current conversation into a handoff document for another agent to pick up.",
+      "installTarget": "handoff",
+      "nextAction": "Ask your coding agent to use the handoff skill.",
+      "dependencies": []
+    },
+    {
+      "id": "skill:herdr",
+      "kind": "skill",
+      "group": "General",
+      "label": "herdr",
+      "description": "Control Herdr, a terminal multiplexer for coding agents. Use only when the user explicitly mentions Herdr or asks to use Herdr to inspect or control panes, tabs, workspaces, terminals, commands, or communication with another agent. Do not use merely because a task could benefit from a background terminal, delegation, or parallel work. Requires HERDR_ENV=1.",
+      "installTarget": "herdr",
+      "nextAction": "Ask your coding agent to use the herdr skill.",
+      "dependencies": []
+    },
+    {
+      "id": "skill:jira",
+      "kind": "skill",
+      "group": "General",
+      "label": "jira",
+      "description": "Use when the user mentions Jira issues (e.g., \"PROJ-123\"), asks about tickets, wants to create/view/update issues, check sprint status, or manage their Jira workflow. Triggers on keywords like \"jira\", \"issue\", \"ticket\", \"sprint\", or issue key patterns.",
+      "installTarget": "jira",
+      "nextAction": "Ask your coding agent to use the jira skill.",
+      "dependencies": []
+    },
+    {
+      "id": "skill:research",
+      "kind": "skill",
+      "group": "General",
+      "label": "research",
+      "description": "Investigate a question against high-trust primary sources and capture the findings as a Markdown file in the repo. Use when the user wants a topic researched, docs or API facts gathered, or reading legwork delegated to a background agent.",
+      "installTarget": "research",
+      "nextAction": "Ask your coding agent to use the research skill.",
+      "dependencies": []
+    },
+    {
+      "id": "skill:ai-setup",
+      "kind": "skill",
+      "group": "General",
+      "label": "ai-setup",
+      "description": "Set up or troubleshoot Yassimba's curated agent skills, Pi packages, Herdr, and Herdr plugins through the ai-setup CLI. Use when the user asks to install this collection, configure Herdr, add one of its capabilities, update the setup, or diagnose installation problems.",
+      "installTarget": "ai-setup",
+      "nextAction": "Ask your coding agent to use the ai-setup skill.",
+      "dependencies": []
+    },
+    {
+      "id": "skill:teach",
+      "kind": "skill",
+      "group": "General",
+      "label": "teach",
+      "description": "Teach the user a new skill or concept, within this workspace.",
+      "installTarget": "teach",
+      "nextAction": "Ask your coding agent to use the teach skill.",
+      "dependencies": []
+    },
+    {
+      "id": "skill:wizard",
+      "kind": "skill",
+      "group": "General",
+      "label": "wizard",
+      "description": "Generate an interactive bash wizard that walks a human through a manual procedure — third-party setup, a one-off migration, an A→B state transition — opening URLs, capturing values, confirming each step, and writing .env files and GitHub Actions secrets.",
+      "installTarget": "wizard",
+      "nextAction": "Ask your coding agent to use the wizard skill.",
+      "dependencies": []
+    },
+    {
+      "id": "skill:write-documentation",
+      "kind": "skill",
+      "group": "General",
+      "label": "write-documentation",
+      "description": "Write software documentation structured by Diátaxis. Use when the user wants a tutorial, how-to guide, reference page, explanation doc, or user guide — \"write docs\", \"document this\", \"we need a guide for X\". Not for READMEs (write-readme) or docstrings (update-docstrings).",
+      "installTarget": "write-documentation",
+      "nextAction": "Ask your coding agent to use the write-documentation skill.",
+      "dependencies": []
+    },
+    {
+      "id": "skill:write-readme",
+      "kind": "skill",
+      "group": "General",
+      "label": "write-readme",
+      "description": "Use when writing or improving README files. Not all READMEs are the same — provides templates and guidance matched to your audience and project type.",
+      "installTarget": "write-readme",
+      "nextAction": "Ask your coding agent to use the write-readme skill.",
+      "dependencies": ["writing-clearly-and-concisely"]
+    },
+    {
+      "id": "skill:writing-clearly-and-concisely",
+      "kind": "skill",
+      "group": "General",
+      "label": "writing-clearly-and-concisely",
+      "description": "Use when writing prose humans will read—documentation, commit messages, error messages, reports, UI text—or when the user wants existing text to sound human rather than AI-written (\"humanize this\", \"reads like ChatGPT\").",
+      "installTarget": "writing-clearly-and-concisely",
+      "nextAction": "Ask your coding agent to use the writing-clearly-and-concisely skill.",
+      "dependencies": []
+    },
+    {
+      "id": "skill:writing-great-skills",
+      "kind": "skill",
+      "group": "General",
+      "label": "writing-great-skills",
+      "description": "Reference for writing and editing skills well — the vocabulary and principles that make a skill predictable.",
+      "installTarget": "writing-great-skills",
+      "nextAction": "Ask your coding agent to use the writing-great-skills skill.",
+      "dependencies": []
+    },
+    {
+      "id": "skill:wtf",
+      "kind": "skill",
+      "group": "General",
+      "label": "wtf",
+      "description": "Make the agent restate its last message in plain language.",
+      "installTarget": "wtf",
+      "nextAction": "Ask your coding agent to use the wtf skill.",
+      "dependencies": []
+    },
+    {
+      "id": "herdr-plugin:yassin.jumplist",
+      "kind": "herdr-plugin",
+      "group": "Herdr plugins",
+      "label": "Pane Jumplist",
+      "description": "Back/forward through pane focus history, VS Code style",
+      "installTarget": "Yassimba/ai-setup/plugins/herdr-jumplist",
+      "nextAction": "Run `herdr plugin list` to see the installed plugin."
+    },
+    {
+      "id": "herdr-plugin:yassin.project-switcher",
+      "kind": "herdr-plugin",
+      "group": "Herdr plugins",
+      "label": "Project Switcher",
+      "description": "Portable fuzzy project picker that changes the focused pane's directory",
+      "installTarget": "Yassimba/ai-setup/plugins/herdr-project-switcher",
+      "nextAction": "Run `herdr plugin list` to see the installed plugin."
+    },
+    {
+      "id": "herdr-plugin:yassimba.reviewr",
+      "kind": "herdr-plugin",
+      "group": "Herdr plugins",
+      "label": "reviewr",
+      "description": "Terminal code-review sidebar for herdr: GitHub PRs and GitLab MRs.",
+      "installTarget": "Yassimba/ai-setup/plugins/herdr-reviewr",
+      "nextAction": "Run `herdr plugin list` to see the installed plugin."
+    }
+  ]
+}

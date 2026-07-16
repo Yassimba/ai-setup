@@ -1,0 +1,75 @@
+{
+  "name": "@yassimba/pi-rewind",
+  "version": "0.1.2",
+  "description": "Reviewed, pinned distribution of the Pi Rewind extension",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=22.6"
+  },
+  "keywords": [
+    "pi-package",
+    "pi",
+    "pi-coding-agent",
+    "rewind",
+    "checkpoint"
+  ],
+  "files": [
+    "index.ts",
+    "README.md",
+    "LICENSE",
+    "THIRD_PARTY_NOTICES.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yassimba/ai-setup.git",
+    "directory": "plugins/rewind"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "prepack": "npm ci --silent --dry-run=false --ignore-scripts --omit=peer --install-strategy=nested --workspaces=false",
+    "postpack": "node -e \"require('node:fs').rmSync('node_modules',{recursive:true,force:true})\""
+  },
+  "pi": {
+    "extensions": [
+      "./index.ts"
+    ]
+  },
+  "aiSetup": {
+    "catalog": {
+      "label": "Rewind",
+      "description": "File checkpoints for Pi's conversation tree: branch to an earlier message and restore files to match"
+    }
+  },
+  "dependencies": {
+    "pi-rewind-hook": "1.8.4"
+  },
+  "bundledDependencies": [
+    "pi-rewind-hook"
+  ],
+  "peerDependencies": {
+    "@earendil-works/pi-ai": "^0.80.7",
+    "@earendil-works/pi-coding-agent": "*",
+    "@earendil-works/pi-tui": "*",
+    "typebox": "*"
+  },
+  "peerDependenciesMeta": {
+    "@earendil-works/pi-ai": {
+      "optional": true
+    },
+    "@earendil-works/pi-coding-agent": {
+      "optional": true
+    },
+    "@earendil-works/pi-tui": {
+      "optional": true
+    },
+    "typebox": {
+      "optional": true
+    }
+  },
+  "bundleDependencies": [
+    "pi-rewind-hook"
+  ]
+}

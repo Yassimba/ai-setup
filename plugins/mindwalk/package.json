@@ -1,0 +1,58 @@
+{
+  "name": "@yassimba/pi-mindwalk",
+  "version": "0.1.0",
+  "description": "Open the current Pi coding-agent session as a Mindwalk 3D codebase replay",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=22.6"
+  },
+  "keywords": [
+    "pi-package",
+    "pi",
+    "pi-coding-agent",
+    "mindwalk",
+    "visualization",
+    "session-replay"
+  ],
+  "files": [
+    "dist",
+    "index.ts",
+    "src",
+    "README.md",
+    "LICENSE",
+    "THIRD_PARTY_NOTICES.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yassimba/ai-setup.git",
+    "directory": "plugins/mindwalk"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build:binaries": "node scripts/build-binaries.mjs",
+    "prepack": "npm run build:binaries"
+  },
+  "pi": {
+    "extensions": [
+      "./index.ts"
+    ]
+  },
+  "aiSetup": {
+    "catalog": {
+      "label": "Mindwalk",
+      "description": "Replay the current Pi session on a 3D map of the codebase",
+      "nextAction": "Run /mindwalk in Pi to open the current session replay."
+    }
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-coding-agent": "*"
+  },
+  "peerDependenciesMeta": {
+    "@earendil-works/pi-coding-agent": {
+      "optional": true
+    }
+  }
+}

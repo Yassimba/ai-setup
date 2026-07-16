@@ -1,0 +1,78 @@
+{
+  "name": "@yassimba/pi-web-access",
+  "version": "0.1.2",
+  "description": "Reviewed, pinned distribution of Pi Web Access",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=22.6"
+  },
+  "keywords": [
+    "pi-package",
+    "pi",
+    "pi-coding-agent",
+    "web-search",
+    "web-access"
+  ],
+  "files": [
+    "index.ts",
+    "README.md",
+    "LICENSE",
+    "THIRD_PARTY_NOTICES.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yassimba/ai-setup.git",
+    "directory": "plugins/web-access"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "prepack": "npm ci --silent --dry-run=false --ignore-scripts --omit=peer --install-strategy=nested --workspaces=false",
+    "postpack": "node -e \"require('node:fs').rmSync('node_modules',{recursive:true,force:true})\""
+  },
+  "pi": {
+    "extensions": [
+      "./index.ts"
+    ],
+    "skills": [
+      "./node_modules/pi-web-access/skills"
+    ]
+  },
+  "aiSetup": {
+    "catalog": {
+      "label": "Web Access",
+      "description": "Search and fetch web, PDF, GitHub, and video content from Pi"
+    }
+  },
+  "dependencies": {
+    "pi-web-access": "0.13.0"
+  },
+  "bundledDependencies": [
+    "pi-web-access"
+  ],
+  "peerDependencies": {
+    "@earendil-works/pi-ai": "^0.80.7",
+    "@earendil-works/pi-coding-agent": "*",
+    "@earendil-works/pi-tui": "*",
+    "typebox": "*"
+  },
+  "peerDependenciesMeta": {
+    "@earendil-works/pi-ai": {
+      "optional": true
+    },
+    "@earendil-works/pi-coding-agent": {
+      "optional": true
+    },
+    "@earendil-works/pi-tui": {
+      "optional": true
+    },
+    "typebox": {
+      "optional": true
+    }
+  },
+  "bundleDependencies": [
+    "pi-web-access"
+  ]
+}

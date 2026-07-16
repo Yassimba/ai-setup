@@ -1,0 +1,97 @@
+id = "yassimba.reviewr"
+name = "reviewr"
+version = "0.3.0"
+min_herdr_version = "0.7.0"
+platforms = ["macos", "linux", "windows"]
+description = "Terminal code-review sidebar for herdr: GitHub PRs and GitLab MRs."
+
+# On `herdr plugin install`, download the prebuilt `herdr-reviewr` binary for this platform from
+# the matching GitHub Release (tag `herdr-reviewr-v<version>` on Yassimba/ai-setup) into
+# $HERDR_PLUGIN_ROOT/bin (no Rust toolchain needed). Skipped by `herdr plugin link` — for a local
+# checkout, build it yourself with `cargo install --path .`.
+[[build]]
+platforms = ["macos", "linux"]
+command = ["bash", "herdr/install.sh"]
+
+[[build]]
+platforms = ["windows"]
+command = ["powershell", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "herdr/install.ps1"]
+
+# The sidebar pane runs the downloaded binary by absolute path under the plugin root, since the
+# pane's cwd is the repo under review (not the plugin root) and the binary isn't on PATH. Env
+# expansion needs a shell; pane ids must be globally unique, so the Windows pane is a separate
+# entrypoint (`sidebar-win`) — the `sidebar` subcommand picks it. Windows uses powershell, not
+# cmd: cmd expands %HERDR_PLUGIN_ROOT% after quoting decisions, so a profile path with a space
+# (C:\Users\Jan Dirk\...) splits mid-path, while $env: expands inside a quoted PS string.
+[[panes]]
+id = "sidebar"
+title = "reviewr"
+placement = "split"
+platforms = ["macos", "linux"]
+command = ["sh", "-c", "exec \"$HERDR_PLUGIN_ROOT/bin/herdr-reviewr\""]
+
+[[panes]]
+id = "sidebar-win"
+title = "reviewr"
+placement = "split"
+platforms = ["windows"]
+command = ["powershell", "-NoProfile", "-Command", "& \"$env:HERDR_PLUGIN_ROOT\\bin\\herdr-reviewr.exe\""]
+
+# Actions run with the plugin root as cwd, so on unix the binary resolves by relative path — no
+# shell, no jq. Windows resolves relative argv[0] against the parent's cwd, not the child's, so
+# the Windows twins go through cmd, which resolves the relative path against its own cwd (the
+# plugin root). The path must stay relative: an expanded %HERDR_PLUGIN_ROOT% reaches cmd
+# unquoted and breaks for profile paths with spaces. Action ids are globally unique, hence the
+# -win suffix (bind `yassimba.reviewr.toggle-win` on Windows).
+[[actions]]
+id = "toggle"
+title = "reviewr: toggle sidebar"
+contexts = ["pane", "workspace"]
+platforms = ["macos", "linux"]
+command = ["bin/herdr-reviewr", "sidebar", "toggle"]
+
+[[actions]]
+id = "open"
+title = "reviewr: open sidebar"
+contexts = ["pane", "workspace"]
+platforms = ["macos", "linux"]
+command = ["bin/herdr-reviewr", "sidebar", "open"]
+
+[[actions]]
+id = "close"
+title = "reviewr: close sidebar"
+contexts = ["pane", "workspace"]
+platforms = ["macos", "linux"]
+command = ["bin/herdr-reviewr", "sidebar", "close"]
+
+[[actions]]
+id = "toggle-win"
+title = "reviewr: toggle sidebar"
+contexts = ["pane", "workspace"]
+platforms = ["windows"]
+command = ["cmd", "/d", "/c", "bin\\herdr-reviewr.exe", "sidebar", "toggle"]
+
+[[actions]]
+id = "open-win"
+title = "reviewr: open sidebar"
+contexts = ["pane", "workspace"]
+platforms = ["windows"]
+command = ["cmd", "/d", "/c", "bin\\herdr-reviewr.exe", "sidebar", "open"]
+
+[[actions]]
+id = "close-win"
+title = "reviewr: close sidebar"
+contexts = ["pane", "workspace"]
+platforms = ["windows"]
+command = ["cmd", "/d", "/c", "bin\\herdr-reviewr.exe", "sidebar", "close"]
+
+# Auto-open the sidebar for a freshly created worktree (gated by auto_open config).
+[[events]]
+on = "worktree.created"
+platforms = ["macos", "linux"]
+command = ["bin/herdr-reviewr", "sidebar", "auto-open"]
+
+[[events]]
+on = "worktree.created"
+platforms = ["windows"]
+command = ["cmd", "/d", "/c", "bin\\herdr-reviewr.exe", "sidebar", "auto-open"]

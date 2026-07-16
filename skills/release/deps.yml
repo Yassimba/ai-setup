@@ -1,0 +1,5 @@
+# Skills this skill invokes; installers pull them in transitively.
+skills:
+  - commit
+  - diagnosing-bugs
+  - setup-project

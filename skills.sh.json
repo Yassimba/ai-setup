@@ -1,0 +1,79 @@
+{
+  "$schema": "https://skills.sh/schemas/skills.sh.schema.json",
+  "notGrouped": "bottom",
+  "groupings": [
+    {
+      "title": "Coding",
+      "description": "The development loop — planning, TDD, debugging, review, release — plus language and infrastructure specialists. Partly adapted from Matt Pocock's skills.",
+      "skills": [
+        "backlog",
+        "blueprint",
+        "brainstorming",
+        "browser-usage",
+        "code-review",
+        "commit",
+        "database-pro",
+        "diagnosing-bugs",
+        "e2e-test",
+        "grill-with-docs",
+        "grill-with-examples",
+        "implement",
+        "loop-me",
+        "merge",
+        "prototype",
+        "python-pro",
+        "refactor",
+        "release",
+        "resolving-merge-conflicts",
+        "setup-project",
+        "tdd",
+        "terraform-engineer",
+        "to-spec",
+        "to-tickets",
+        "update-docstrings",
+        "wayfinder"
+      ]
+    },
+    {
+      "title": "Architecture",
+      "description": "Design and understand the shape of a system: deep modules, domain language, and guided walkthroughs of unfamiliar code.",
+      "skills": [
+        "codebase-design",
+        "domain-modeling",
+        "explain-code-flow",
+        "improve-codebase-architecture",
+        "zoom-out"
+      ]
+    },
+    {
+      "title": "Diagrams",
+      "description": "Turn systems and data into pictures — draw.io, Mermaid, and infographics.",
+      "skills": ["drawio-skill", "infographic-designer", "mermaid-skill"]
+    },
+    {
+      "title": "Presentations",
+      "description": "Build slide decks in Marp markdown or PowerPoint.",
+      "skills": ["marp-slide", "pptx"]
+    },
+    {
+      "title": "General",
+      "description": "Interviewing, teaching, writing, and note-taking — skills for the work around the code.",
+      "skills": [
+        "grill-me",
+        "grilling",
+        "handoff",
+        "herdr",
+        "jira",
+        "research",
+        "ai-setup",
+        "teach",
+        "wizard",
+        "write-documentation",
+        "write-readme",
+        "writing-clearly-and-concisely",
+        "writing-great-skills",
+        "wtf"
+      ]
+    }
+  ]
+}

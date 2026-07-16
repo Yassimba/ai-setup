@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "mindwalk",
+      "runtimeExecutable": "bin/mindwalk",
+      "runtimeArgs": ["serve", "--no-open", "--dev", "--port", "8931"],
+      "port": 8931
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "name": "ai-setup",
+  "owner": {
+    "name": "Yassimba"
+  },
+  "metadata": {
+    "description": "Yassimba's collection of reviewed agent skills"
+  },
+  "plugins": [
+    {
+      "name": "ai-setup",
+      "source": "./",
+      "description": "Reviewed skills for coding, architecture, diagrams, presentations, and general agent workflows",
+      "author": {
+        "name": "Yassimba"
+      },
+      "homepage": "https://github.com/Yassimba/ai-setup",
+      "repository": "https://github.com/Yassimba/ai-setup",
+      "license": "MIT",
+      "category": "development",
+      "tags": [
+        "agent-skills",
+        "coding",
+        "productivity"
+      ]
+    }
+  ]
+}

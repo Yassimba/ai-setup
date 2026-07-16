@@ -1,0 +1,40 @@
+{
+  "name": "ai-setup",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Development workspace for Yassimba's agent skills and Pi extensions",
+  "license": "MIT",
+  "type": "module",
+  "workspaces": [
+    "plugins/*"
+  ],
+  "engines": {
+    "node": ">=22.6"
+  },
+  "scripts": {
+    "catalog:generate": "node scripts/generate-setup-catalog.mjs",
+    "catalog:check": "node scripts/generate-setup-catalog.mjs --check",
+    "check:rust": "cargo fmt --manifest-path cli/ai-setup/Cargo.toml -- --check && cargo clippy --manifest-path cli/ai-setup/Cargo.toml --all-targets -- -D warnings && cargo test --manifest-path cli/ai-setup/Cargo.toml",
+    "test": "node --experimental-strip-types --test test/*.test.mjs test/*.test.ts",
+    "typecheck": "tsc --noEmit",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
+    "audit": "fallow audit",
+    "audit:brief": "fallow review --brief",
+    "pack:check": "npm pack --dry-run --workspaces",
+    "release:plan": "node scripts/plan-releases.mjs",
+    "release:resolve": "node scripts/resolve-release.mjs",
+    "check:js": "npm test && npm run typecheck && npm run lint && npm run catalog:check && npm run pack:check",
+    "check": "npm run check:js && npm run check:rust"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.5.4",
+    "@earendil-works/pi-coding-agent": "^0.80.7",
+    "@earendil-works/pi-tui": "^0.80.5",
+    "@types/node": "^26.1.1",
+    "fallow": "3.6.0",
+    "typebox": "^1.3.6",
+    "typescript": "^7.0.2",
+    "yaml": "^2.8.1"
+  }
+}

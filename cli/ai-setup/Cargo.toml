@@ -1,0 +1,20 @@
+[package]
+name = "ai-setup"
+version = "0.6.1"
+edition = "2021"
+description = "Install and manage Yassimba's curated agent skills, Pi packages, and Herdr plugins"
+license = "MIT"
+repository = "https://github.com/Yassimba/ai-setup"
+
+[dependencies]
+anyhow = "1"
+clap = { version = "4.5", features = ["derive"] }
+dirs = "6"
+inquire = "0.7"
+ratatui = "0.29"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+toml_edit = "0.22"
+
+[dev-dependencies]
+pretty_assertions = "1"

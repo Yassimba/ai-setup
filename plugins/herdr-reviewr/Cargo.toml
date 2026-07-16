@@ -1,0 +1,57 @@
+[package]
+name = "herdr-reviewr"
+version = "0.3.0"
+edition = "2024"
+rust-version = "1.90"
+description = "A herdr-native review sidebar: browse an agent's changes, follow the GitHub PR or GitLab MR, and send comments back to chat, in the terminal."
+authors = [
+    "Yassin Chibrani - Derks <yassin@indigohouse.nl>",
+    "Dmitry Persiyanov <dmitry.persiyanov@gmail.com>",
+]
+license = "MIT"
+repository = "https://github.com/Yassimba/ai-setup"
+readme = "README.md"
+keywords = ["herdr", "tui", "diff", "review", "agent"]
+categories = ["command-line-utilities", "development-tools"]
+
+[dependencies]
+anyhow = "1"
+# The local collaboration socket between reviewr and the Pi extension - one crate for Unix
+# domain sockets and Windows named pipes, the same transport Herdr itself uses.
+interprocess = "2"
+ratatui = "0.30"
+serde_json = "1"
+# GitLab's multi-line comment positions are addressed by line codes: sha1(path)_old_new.
+sha1_smol = "1"
+similar = { version = "3.1.1", features = ["text"] }
+syntect = { version = "5.3.0", default-features = false, features = ["default-fancy"] }
+toml = "0.8"
+# default-features off: the default pulls syntect's oniguruma C engine, which breaks Windows
+# cross-builds and contradicts the fancy-regex (pure Rust) engine selected for syntect above.
+two-face = { version = "0.5.1", default-features = false, features = ["syntect-default-fancy"] }
+unicode-width = "0.2"
+
+[dev-dependencies]
+tempfile = "3"
+
+[lints.rust]
+unsafe_code = "forbid"
+unreachable_pub = "warn"
+missing_debug_implementations = "warn"
+
+[lints.clippy]
+all = { level = "warn", priority = -1 }
+pedantic = { level = "warn", priority = -1 }
+# Pragmatic allows for an application binary (vs a public library):
+missing_errors_doc = "allow"
+missing_panics_doc = "allow"
+module_name_repetitions = "allow"
+must_use_candidate = "allow"
+cast_possible_truncation = "allow"
+cast_sign_loss = "allow"
+cast_possible_wrap = "allow"
+too_many_lines = "allow"
+
+[profile.release]
+strip = true
+lto = "thin"

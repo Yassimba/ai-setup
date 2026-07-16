@@ -1,0 +1,48 @@
+{
+  "name": "@yassimba/pi-reviewr-collab",
+  "version": "0.2.0",
+  "description": "Trusted Pi extension binding a Pi session to a reviewr pane: prompt context capture, tool-location reporting, and local review-draft staging over a local socket",
+  "author": "Yassin Chibrani - Derks",
+  "license": "MIT",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yassimba/ai-setup.git",
+    "directory": "plugins/pi-reviewr-collab"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "pi-package",
+    "pi",
+    "pi-coding-agent",
+    "reviewr",
+    "code-review"
+  ],
+  "files": [
+    "index.ts",
+    "src/**/*.ts",
+    "README.md"
+  ],
+  "scripts": {
+    "test": "node --experimental-strip-types --test test/*.test.ts"
+  },
+  "pi": {
+    "extensions": [
+      "./index.ts"
+    ]
+  },
+  "aiSetup": {
+    "catalog": {
+      "label": "Reviewr Collaboration",
+      "description": "Connect Pi to reviewr for review context, agent following, and local draft staging"
+    }
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-coding-agent": "*"
+  },
+  "dependencies": {
+    "typebox": "^1.3.6"
+  }
+}

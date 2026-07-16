@@ -1,0 +1,6 @@
+# Skills this skill invokes; installers pull them in transitively.
+skills:
+  - domain-modeling
+  - grilling
+  - prototype
+  - setup-project

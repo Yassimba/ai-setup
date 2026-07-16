@@ -1,0 +1,19 @@
+# Rust
+/target/
+**/*.rs.bk
+Cargo.lock.bak
+
+# macOS
+.DS_Store
+
+# editor / local
+.idea/
+.vscode/
+*.swp
+*.log
+
+# herdr local state (if any lands here during dev)
+/.herdr-state/
+
+# Prebuilt binary dropped by herdr/install.sh on `herdr plugin install`
+/bin/

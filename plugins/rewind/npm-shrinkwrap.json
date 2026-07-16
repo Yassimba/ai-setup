@@ -1,0 +1,49 @@
+{
+  "name": "@yassimba/pi-rewind",
+  "version": "0.1.0",
+  "lockfileVersion": 3,
+  "requires": true,
+  "packages": {
+    "": {
+      "name": "@yassimba/pi-rewind",
+      "version": "0.1.0",
+      "bundleDependencies": [
+        "pi-rewind-hook"
+      ],
+      "license": "MIT",
+      "dependencies": {
+        "pi-rewind-hook": "1.8.4"
+      },
+      "engines": {
+        "node": ">=22.6"
+      },
+      "peerDependencies": {
+        "@earendil-works/pi-ai": "*",
+        "@earendil-works/pi-coding-agent": "*",
+        "@earendil-works/pi-tui": "*",
+        "typebox": "*"
+      },
+      "peerDependenciesMeta": {
+        "@earendil-works/pi-ai": {
+          "optional": true
+        },
+        "@earendil-works/pi-coding-agent": {
+          "optional": true
+        },
+        "@earendil-works/pi-tui": {
+          "optional": true
+        },
+        "typebox": {
+          "optional": true
+        }
+      }
+    },
+    "node_modules/pi-rewind-hook": {
+      "version": "1.8.4",
+      "resolved": "https://registry.npmjs.org/pi-rewind-hook/-/pi-rewind-hook-1.8.4.tgz",
+      "integrity": "sha512-M2V/8pR62pdV/el8hUULpb6abty8i/Z6+CidfiJ/LB00aQ3vaMk+8wvoz/XaoGrW8vLhqwJrdY/Kwaac2eOoMg==",
+      "inBundle": true,
+      "license": "MIT"
+    }
+  }
+}

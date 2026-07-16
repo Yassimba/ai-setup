@@ -1,0 +1,14 @@
+.DS_Store
+__pycache__/
+*.pyc
+.claude/settings.local.json
+node_modules/
+cli/ai-setup/target/
+.pi-subagents/
+/ai-docs/
+e2e-output/
+*.tgz
+ai-docs
+.pi
+drafts
+personal

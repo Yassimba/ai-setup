@@ -1,0 +1,171 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mindwalk.local/schema/trace.schema.json",
+  "title": "mindwalk trace",
+  "type": "object",
+  "required": ["version", "session", "events", "marks", "stats"],
+  "properties": {
+    "version": { "const": 1 },
+    "session": {
+      "type": "object",
+      "required": ["id", "harness", "eventCount"],
+      "properties": {
+        "id": { "type": "string" },
+        "harness": { "type": "string" },
+        "model": { "type": "string" },
+        "title": { "type": "string" },
+        "cwd": { "type": "string" },
+        "commit": { "type": "string" },
+        "startedAt": { "type": "string" },
+        "endedAt": { "type": "string" },
+        "eventCount": { "type": "integer", "minimum": 0 },
+        "path": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "events": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["seq", "tool", "action", "targets", "resultBytes", "isError", "summary"],
+        "properties": {
+          "seq": { "type": "integer", "minimum": 0 },
+          "ts": { "type": "string" },
+          "tool": { "type": "string" },
+          "action": { "enum": ["search", "read", "edit", "exec", "verify", "other"] },
+          "targets": {
+            "type": "array",
+            "items": { "$ref": "#/$defs/target" }
+          },
+          "outside": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["scope", "path"],
+              "properties": {
+                "scope": { "enum": ["home", "tmp", "other"] },
+                "path": { "type": "string" }
+              },
+              "additionalProperties": false
+            }
+          },
+          "resultBytes": { "type": "integer", "minimum": 0 },
+          "isError": { "type": "boolean" },
+          "summary": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "marks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["seq", "type"],
+        "properties": {
+          "seq": { "type": "integer", "minimum": 0 },
+          "type": { "enum": ["compaction", "user-message", "subagent"] },
+          "note": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "stats": {
+      "type": "object",
+      "required": [
+        "filesInRepo",
+        "fovea",
+        "parafovea",
+        "edited",
+        "eventsBeforeFirstEdit",
+        "regressionRate",
+        "errorRate",
+        "actions",
+        "errors",
+        "maxEditsPerFile",
+        "churnFiles",
+        "userTurns",
+        "compactions",
+        "subagents",
+        "resultBytes",
+        "editsAfterLastVerify",
+        "observability"
+      ],
+      "properties": {
+        "filesInRepo": { "type": "integer", "minimum": 0 },
+        "fovea": { "type": "integer", "minimum": 0 },
+        "parafovea": { "type": "integer", "minimum": 0 },
+        "edited": { "type": "integer", "minimum": 0 },
+        "eventsBeforeFirstEdit": { "type": "integer", "minimum": 0 },
+        "regressionRate": { "type": "number", "minimum": 0 },
+        "errorRate": { "type": "number", "minimum": 0 },
+        "actions": { "$ref": "#/$defs/actionCounts" },
+        "errors": { "$ref": "#/$defs/actionCounts" },
+        "maxEditsPerFile": { "type": "integer", "minimum": 0 },
+        "churnFiles": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Files edited in three or more events"
+        },
+        "userTurns": { "type": "integer", "minimum": 0 },
+        "compactions": { "type": "integer", "minimum": 0 },
+        "subagents": { "type": "integer", "minimum": 0 },
+        "resultBytes": { "type": "integer", "minimum": 0 },
+        "editsAfterLastVerify": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Edit events after the last verify event; every edit event when the session never verified"
+        },
+        "observability": {
+          "type": "object",
+          "description": "Grades each derived metric's source signal: exact when the harness records it structurally, estimated when inferred from command or output text, unavailable when the log carries no usable signal",
+          "required": ["reads", "errors"],
+          "properties": {
+            "reads": { "enum": ["exact", "estimated", "unavailable"] },
+            "errors": { "enum": ["exact", "estimated", "unavailable"] }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "actionCounts": {
+      "type": "object",
+      "required": ["search", "read", "edit", "exec", "verify", "other"],
+      "properties": {
+        "search": { "type": "integer", "minimum": 0 },
+        "read": { "type": "integer", "minimum": 0 },
+        "edit": { "type": "integer", "minimum": 0 },
+        "exec": { "type": "integer", "minimum": 0 },
+        "verify": { "type": "integer", "minimum": 0 },
+        "other": { "type": "integer", "minimum": 0 }
+      },
+      "additionalProperties": false
+    },
+    "target": {
+      "type": "object",
+      "required": ["path", "touch"],
+      "properties": {
+        "path": { "type": "string" },
+        "fileId": { "type": "integer", "minimum": 0 },
+        "touch": { "enum": ["hit", "read", "edit"] },
+        "lines": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "prefixItems": [
+              { "type": "integer", "minimum": 1 },
+              { "type": "integer", "minimum": 1 }
+            ],
+            "minItems": 2,
+            "maxItems": 2
+          }
+        },
+        "weak": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    }
+  }
+}

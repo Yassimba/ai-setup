@@ -1,0 +1,6 @@
+{"type":"ai-title","aiTitle":"Demo trace","sessionId":"demo-session"}
+{"type":"user","timestamp":"2026-07-09T00:00:00Z","cwd":"/repo","sessionId":"demo-session","message":{"role":"user","content":"inspect the repo"}}
+{"type":"assistant","timestamp":"2026-07-09T00:00:01Z","cwd":"/repo","sessionId":"demo-session","message":{"role":"assistant","model":"claude-test","content":[{"type":"tool_use","id":"toolu_read","name":"Read","input":{"file_path":"/repo/src/main.go","offset":10,"limit":5}}]}}
+{"type":"user","timestamp":"2026-07-09T00:00:02Z","cwd":"/repo","sessionId":"demo-session","message":{"role":"user","content":[{"tool_use_id":"toolu_read","type":"tool_result","content":"10\tpackage main\n11\tfunc main() {}\n","is_error":false}]}}
+{"type":"assistant","timestamp":"2026-07-09T00:00:03Z","cwd":"/repo","sessionId":"demo-session","message":{"role":"assistant","content":[{"type":"tool_use","id":"toolu_edit","name":"Edit","input":{"file_path":"/repo/src/main.go","old_string":"main","new_string":"run"}}]}}
+{"type":"user","timestamp":"2026-07-09T00:00:04Z","cwd":"/repo","sessionId":"demo-session","message":{"role":"user","content":[{"tool_use_id":"toolu_edit","type":"tool_result","content":"updated","is_error":false}]}}

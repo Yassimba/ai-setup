@@ -1,0 +1,53 @@
+{
+  "name": "@yassimba/pi-herdr-worktree",
+  "version": "0.2.0",
+  "description": "Continue the active Pi session in a fresh Herdr-managed git worktree",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=22.6"
+  },
+  "keywords": [
+    "pi-package",
+    "pi",
+    "pi-coding-agent",
+    "herdr",
+    "worktree"
+  ],
+  "files": [
+    "index.ts",
+    "src",
+    "README.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yassimba/ai-setup.git",
+    "directory": "plugins/herdr-worktree"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "pi": {
+    "extensions": [
+      "./index.ts"
+    ]
+  },
+  "aiSetup": {
+    "catalog": {
+      "label": "Herdr Worktree",
+      "description": "Continue the active Pi session in a fresh Herdr git worktree"
+    }
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-coding-agent": "*",
+    "typebox": "*"
+  },
+  "peerDependenciesMeta": {
+    "@earendil-works/pi-coding-agent": {
+      "optional": true
+    },
+    "typebox": {
+      "optional": true
+    }
+  }
+}

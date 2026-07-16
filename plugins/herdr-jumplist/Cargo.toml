@@ -1,0 +1,16 @@
+[package]
+name = "herdr-jumplist"
+version = "0.2.0"
+edition = "2021"
+rust-version = "1.89"
+description = "Back/forward pane focus history plugin for herdr"
+license = "MIT"
+
+[dependencies]
+anyhow = "1"
+interprocess = "2.4.2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+[profile.release]
+strip = true

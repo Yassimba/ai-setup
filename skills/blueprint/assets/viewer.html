@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Blueprint</title>
+<style>
+  :root { --bg:#ffffff; --fg:#1a1a1a; --muted:#666; --line:#ddd; --accent:#2563eb; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#101014; --fg:#e8e8e8; --muted:#999; --line:#333; --accent:#60a5fa; }
+  }
+  body { margin:0; font-family:system-ui,sans-serif; background:var(--bg); color:var(--fg); }
+  header { padding:1rem 2rem; border-bottom:1px solid var(--line); display:flex; align-items:baseline; gap:2rem; flex-wrap:wrap; }
+  h1 { font-size:1.1rem; margin:0; }
+  nav { display:flex; gap:.5rem; }
+  nav button { background:none; border:1px solid var(--line); color:var(--muted); padding:.35rem .9rem; border-radius:999px; cursor:pointer; font:inherit; }
+  nav button.active { border-color:var(--accent); color:var(--accent); }
+  main { padding:1.5rem 2rem; }
+  body.tabbed main section:not(.active) { display:none; }
+  pre.mermaid { background:none; overflow:auto; }
+  pre.blueprint-error { color:#dc2626; white-space:pre-wrap; }
+  noscript, .offline-note { color:var(--muted); font-size:.9rem; }
+</style>
+</head>
+<body>
+<header>
+  <!-- BLUEPRINT:TITLE — put the change name in the h1 -->
+  <h1 id="title">Blueprint</h1>
+  <nav id="tabs"></nav>
+</header>
+<main>
+<!-- BLUEPRINT:DIAGRAMS:START
+     Replace everything between these markers.
+     One <section title="..."> per diagram; the title becomes the tab label.
+     Escape < as &lt; in diagram text (classDiagram <<new>> must be written &lt;&lt;new&gt;&gt;). -->
+<section title="Flow"><pre class="mermaid">
+flowchart TD
+    A[Replace this placeholder] --> B[With real diagrams]
+</pre></section>
+<!-- BLUEPRINT:DIAGRAMS:END -->
+</main>
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+  const dark = matchMedia("(prefers-color-scheme: dark)").matches;
+  mermaid.initialize({ startOnLoad: false, theme: dark ? "dark" : "default" });
+  for (const el of document.querySelectorAll("pre.mermaid")) {   // render while visible; keep going past errors
+    try { await mermaid.run({ nodes: [el] }); }
+    catch (e) {
+      const msg = document.createElement("pre");
+      msg.className = "blueprint-error";
+      msg.textContent = String(e && e.message || e);
+      el.replaceWith(msg);
+    }
+  }
+  const sections = [...document.querySelectorAll("main section")];
+  const nav = document.getElementById("tabs");
+  const buttons = sections.map((s, i) => {
+    const b = document.createElement("button");
+    b.textContent = s.getAttribute("title") || `Diagram ${i + 1}`;
+    b.onclick = () => {
+      sections.forEach(x => x.classList.remove("active"));
+      buttons.forEach(x => x.classList.remove("active"));
+      s.classList.add("active");
+      b.classList.add("active");
+    };
+    nav.appendChild(b);
+    return b;
+  });
+  document.body.classList.add("tabbed");     // only hide inactive tabs after render
+  buttons[0]?.click();
+  document.title = document.getElementById("title").textContent;
+</script>
+<noscript>JavaScript is required to render the diagrams. The Mermaid sources are readable above.</noscript>
+</body>
+</html>

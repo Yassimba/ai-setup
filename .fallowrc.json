@@ -1,0 +1,29 @@
+{
+  "$schema": "https://docs.fallow.tools/schemas/fallowrc.json",
+  "entry": ["plugins/*/src/index.ts", "plugins/*/src/*/index.ts"],
+  "ignorePatterns": [
+    "skills/**",
+    "drafts/**",
+    "plugins/herdr-reviewr/**",
+    "plugins/herdr-project-switcher/**",
+    "plugins/herdr-jumplist/**",
+    "plugins/pi-subagents/**",
+    "plugins/mindwalk/assets/**",
+    "plugins/mindwalk/cmd/**",
+    "plugins/mindwalk/internal/**",
+    "plugins/mindwalk/schema/**",
+    "plugins/mindwalk/testdata/**",
+    "plugins/mindwalk/web/**",
+    "**/*.generated.*"
+  ],
+  "ignoreDependencies": ["pi-claude-bridge", "pi-rewind-hook", "pi-web-access"],
+  "ignoreExportsUsedInFile": true,
+  "health": {
+    "maxCyclomatic": 15,
+    "maxCognitive": 20,
+    "maxCrap": 250
+  },
+  "rules": {
+    "dev-dependencies-in-production": "off"
+  }
+}

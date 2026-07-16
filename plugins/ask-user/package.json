@@ -1,0 +1,71 @@
+{
+  "name": "@yassimba/pi-ask-user",
+  "version": "0.1.1",
+  "description": "Reviewed, pinned distribution of pi-ask-user",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=22.6"
+  },
+  "keywords": [
+    "pi-package",
+    "pi",
+    "pi-coding-agent",
+    "ask_user",
+    "multi-select"
+  ],
+  "files": [
+    "index.ts",
+    "README.md",
+    "LICENSE",
+    "THIRD_PARTY_NOTICES.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yassimba/ai-setup.git",
+    "directory": "plugins/ask-user"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "prepack": "npm ci --silent --dry-run=false --ignore-scripts --omit=peer --install-strategy=nested --workspaces=false",
+    "postpack": "node -e \"require('node:fs').rmSync('node_modules',{recursive:true,force:true})\""
+  },
+  "pi": {
+    "extensions": [
+      "./index.ts"
+    ],
+    "skills": [
+      "./node_modules/pi-ask-user/skills"
+    ]
+  },
+  "aiSetup": {
+    "catalog": {
+      "label": "Ask User",
+      "description": "Interactive ask_user tool with searchable selection UI, multi-select, and freeform input"
+    }
+  },
+  "dependencies": {
+    "pi-ask-user": "0.12.0"
+  },
+  "bundledDependencies": [
+    "pi-ask-user"
+  ],
+  "peerDependencies": {
+    "@earendil-works/pi-coding-agent": "*",
+    "@earendil-works/pi-tui": "*",
+    "@sinclair/typebox": "*"
+  },
+  "peerDependenciesMeta": {
+    "@earendil-works/pi-coding-agent": {
+      "optional": true
+    },
+    "@earendil-works/pi-tui": {
+      "optional": true
+    },
+    "@sinclair/typebox": {
+      "optional": true
+    }
+  }
+}

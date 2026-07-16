@@ -1,0 +1,70 @@
+{
+  "schema": 1,
+  "releases": [
+    {
+      "id": "ai-setup",
+      "version": "0.6.1",
+      "tag": "ai-setup-v0.6.1",
+      "bump": "patch",
+      "distribution": "rust-binary",
+      "commits": [
+        {
+          "hash": "9244cfde37a3f63e624e3c01c9fd1a335dc213c6",
+          "subject": "ci: bump the development-dependencies group across 1 directory with 5 updates (#49)"
+        }
+      ]
+    },
+    {
+      "id": "claude-bridge",
+      "version": "0.1.2",
+      "tag": "claude-bridge-v0.1.2",
+      "bump": "patch",
+      "distribution": "npm",
+      "commits": [
+        {
+          "hash": "9244cfde37a3f63e624e3c01c9fd1a335dc213c6",
+          "subject": "ci: bump the development-dependencies group across 1 directory with 5 updates (#49)"
+        }
+      ]
+    },
+    {
+      "id": "pi-subagents",
+      "version": "0.37.1",
+      "tag": "pi-subagents-v0.37.1",
+      "bump": "patch",
+      "distribution": "npm",
+      "commits": [
+        {
+          "hash": "9244cfde37a3f63e624e3c01c9fd1a335dc213c6",
+          "subject": "ci: bump the development-dependencies group across 1 directory with 5 updates (#49)"
+        }
+      ]
+    },
+    {
+      "id": "rewind",
+      "version": "0.1.2",
+      "tag": "rewind-v0.1.2",
+      "bump": "patch",
+      "distribution": "npm",
+      "commits": [
+        {
+          "hash": "9244cfde37a3f63e624e3c01c9fd1a335dc213c6",
+          "subject": "ci: bump the development-dependencies group across 1 directory with 5 updates (#49)"
+        }
+      ]
+    },
+    {
+      "id": "web-access",
+      "version": "0.1.2",
+      "tag": "web-access-v0.1.2",
+      "bump": "patch",
+      "distribution": "npm",
+      "commits": [
+        {
+          "hash": "9244cfde37a3f63e624e3c01c9fd1a335dc213c6",
+          "subject": "ci: bump the development-dependencies group across 1 directory with 5 updates (#49)"
+        }
+      ]
+    }
+  ]
+}

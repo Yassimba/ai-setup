@@ -1,0 +1,4 @@
+# Skills this skill invokes; installers pull them in transitively.
+skills:
+  - diagnosing-bugs
+  - writing-clearly-and-concisely
