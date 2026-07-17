@@ -53,7 +53,7 @@
     "pi-web-access"
   ],
   "peerDependencies": {
-    "@earendil-works/pi-ai": "^0.80.7",
+    "@earendil-works/pi-ai": "^0.80.10",
     "@earendil-works/pi-coding-agent": "*",
     "@earendil-works/pi-tui": "*",
     "typebox": "*"
